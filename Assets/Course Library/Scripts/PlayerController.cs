@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
+ 
 
 public class PlayerController : MonoBehaviour
 {
@@ -71,7 +72,7 @@ public class PlayerController : MonoBehaviour
     // PLAYER DESTROYED
     // =========================
     public bool CheckPlayerDestroyed = false;
-
+    public GameManager gameManager;
 
     // =========================
     // AWAKE
@@ -86,16 +87,28 @@ public class PlayerController : MonoBehaviour
 
         // Find the Focal Point in the scene
         focalPoint = GameObject.Find("Focal Point");
-    }
 
+    }
 
     // =========================
     // ENABLE INPUT
     // =========================
-    void OnEnable()
+     private void OnEnable()
+{
+    if (controls != null)
     {
         controls.Player.Enable();
     }
+}
+
+private void OnDisable()
+{
+    if (controls != null)
+    {
+        controls.Player.Disable();
+    }
+}
+   
 
 
     // =========================
@@ -134,9 +147,9 @@ public class PlayerController : MonoBehaviour
         // AND the player presses F,
         // launch rockets at all enemies.
         if (currentPowerUp == PowerUpType.Rockets &&
-            Input.GetKeyDown(KeyCode.F))
-        {
-            LaunchRockets();
+           controls.Player.Rocket.WasPressedThisFrame())
+       {
+             LaunchRockets();
         }
 
 
@@ -148,10 +161,10 @@ public class PlayerController : MonoBehaviour
         // 1. Player currently has Smash power-up
         // 2. Space key is pressed
         // 3. Player is NOT already smashing
-        if (currentPowerUp == PowerUpType.Smash &&
-            Input.GetKeyDown(KeyCode.Space) &&
+         if (currentPowerUp == PowerUpType.Smash &&
+            controls.Player.Jump.WasPressedThisFrame() &&
             !smashing)
-        {
+         {
             // Player is now performing Smash
             smashing = true;
 
@@ -381,10 +394,9 @@ public class PlayerController : MonoBehaviour
     {
         // Check if the player has fallen below the boundary
         if (transform.position.y < BottomBound)
-        {
+        {   
+            gameManager.GameOver();
             // Destroy the player
-            Destroy(gameObject);
-
             return true;
         }
 

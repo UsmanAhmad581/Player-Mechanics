@@ -186,8 +186,7 @@ public class SpawnManager : MonoBehaviour
         // NEW WAVE + RANDOM POWER-UP
         // =================================================
 
-        if (enemyCount == 0 &&
-            playerControllerScript.CheckPlayerDestroyed == false)
+        if (enemyCount == 0)
         {
             // Increase the wave number
             waveNumber++;

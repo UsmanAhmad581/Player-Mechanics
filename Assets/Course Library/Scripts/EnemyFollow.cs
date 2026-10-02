@@ -32,11 +32,9 @@ public class EnemyFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        if(playerControllerScript.CheckPlayerDestroyed == false)
-        {
           Vector3 lookDirection = (player.transform.position - transform.position).normalized;
            enemyRb.AddForce(lookDirection * speed * Time.deltaTime);
-        }
+        
         if (isBoss)
         {
             if (Time.time > nextspawn)
