@@ -10,6 +10,10 @@ public class SpawnManager : MonoBehaviour
     public int enemyCount;
     public int waveNumber = 1;
 
+    public GameObject bossPrefab;
+    public GameObject[] miniEnemyPrefabs;
+    public int bossRound;
+
     // =====================================================
     // CHANGED:
     // Changed powerupPrefab to powerupPrefabs (array).
@@ -53,7 +57,7 @@ public class SpawnManager : MonoBehaviour
 
 
         // Spawn the first enemy wave
-        spawnEnemyWave(waveNumber);
+        SpawnEnemyWave(waveNumber);
     }
 
 
@@ -75,14 +79,42 @@ public class SpawnManager : MonoBehaviour
 
         return randomPos;
     }
+    void SpawnBossWave(int currentRound)
+    {
+     int miniEnemysToSpawn;
+     //We dont want to divide by 0!
+     if (bossRound != 0)
+     {
+     miniEnemysToSpawn = currentRound / bossRound;
+     }
+     else
+     {
+     miniEnemysToSpawn = 1;
+     }
+     var boss = Instantiate(bossPrefab, GenerateSpawnPosition(),
+     bossPrefab.transform.rotation);
+     boss.GetComponent<EnemyFollow>().miniEnemySpawnCount = miniEnemysToSpawn;
+     }
+     public void SpawnMiniEnemy(int amount)
+    {
+    for (int i = 0; i < amount; i++)
+    {
+        int randomMini = Random.Range(0, miniEnemyPrefabs.Length);
 
+        Instantiate(
+            miniEnemyPrefabs[randomMini],
+            GenerateSpawnPosition(),
+            miniEnemyPrefabs[randomMini].transform.rotation
+        );
+    }
+}
 
     // =====================================================
     // SPAWN ENEMY WAVE
     // =====================================================
 
     // Spawns a wave of enemies based on the wave number
-    void spawnEnemyWave(int enemiesToSpawn)
+    void SpawnEnemyWave(int enemiesToSpawn)
     {
         for (int i = 0; i < enemiesToSpawn; i++)
         {
@@ -142,12 +174,6 @@ public class SpawnManager : MonoBehaviour
 
     void Update()
     {
-        // if (Time.time > ProjectileSpawnTime)
-        // {
-        //     spawnProjectile();
-        //     ProjectileSpawnTime = Time.time + 0.5f;
-        // }
-
 
         // Count all enemies currently in the scene
         enemyCount =
@@ -166,8 +192,15 @@ public class SpawnManager : MonoBehaviour
             // Increase the wave number
             waveNumber++;
 
-            // Spawn the next wave
-            spawnEnemyWave(waveNumber);
+                           // Spawn a boss every x number of waves
+           if (waveNumber % bossRound == 0)
+          {
+            SpawnBossWave(waveNumber);
+            }
+            else
+           {
+            SpawnEnemyWave(waveNumber);
+            }
 
 
             // Select a random power-up

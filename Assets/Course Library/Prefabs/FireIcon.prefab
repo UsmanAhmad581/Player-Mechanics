@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 3802105353613236089}
   - component: {fileID: 2106537866273098834}
   - component: {fileID: 7143335144530230261}
+  - component: {fileID: -6155824799045719646}
   m_Layer: 0
   m_Name: FireIcon
-  m_TagString: Fire
+  m_TagString: Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -155,3 +155,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyFollow
   speed: 1500
   enemyRb: {fileID: 3060508241573620870}
+  isBoss: 0
+  spawnInterval: 3
+  miniEnemySpawnCount: 0

@@ -6,6 +6,14 @@ public class EnemyFollow : MonoBehaviour
     public float speed = 5f;
     public Rigidbody enemyRb;
     private float bottomBound = -10f;
+
+    public  bool isBoss = false;
+    public float spawnInterval;
+    private float nextspawn;
+
+    public int miniEnemySpawnCount;
+
+    private SpawnManager spawnManagerScript;
     private PlayerController playerControllerScript;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -14,6 +22,11 @@ public class EnemyFollow : MonoBehaviour
         playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
         enemyRb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
+
+        if(isBoss)
+        {
+            spawnManagerScript = FindObjectOfType<SpawnManager>();
+        }
     }
 
     // Update is called once per frame
@@ -24,9 +37,19 @@ public class EnemyFollow : MonoBehaviour
           Vector3 lookDirection = (player.transform.position - transform.position).normalized;
            enemyRb.AddForce(lookDirection * speed * Time.deltaTime);
         }
+        if (isBoss)
+        {
+            if (Time.time > nextspawn)
+            {
+                nextspawn = Time.time + spawnInterval;
+                spawnManagerScript.SpawnMiniEnemy(miniEnemySpawnCount);
+            }
+        }
         if (transform.position.y < bottomBound)
         {
             Destroy(gameObject);
         }
+        
     }
+    
 }
