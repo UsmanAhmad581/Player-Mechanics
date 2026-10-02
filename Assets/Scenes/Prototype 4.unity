@@ -985,9 +985,8 @@ MonoBehaviour:
   - {fileID: 984588104887318121, guid: 878be04a570e948458377f07d57b5666, type: 3}
   enemyCount: 0
   waveNumber: 1
-  powerupPrefab:
+  powerupPrefabs:
   - {fileID: 4550507397534086163, guid: c3df8888fbc748443be3f0ed7db8b793, type: 3}
-  - {fileID: 5685313153148845770, guid: 391cdae0e5c111b4180ee80b8f3167e8, type: 3}
   - {fileID: 4907248367865718451, guid: 9990f6a6721c4e647bcb9ba8950e1045, type: 3}
   GameOverText: {fileID: 1507155747}
 --- !u!1 &1724336255
@@ -1225,7 +1224,9 @@ MonoBehaviour:
   speed: 2000
   rb: {fileID: 1916379993}
   hasPowerup: 0
+  currentPowerUp: 0
   powerupIndicator: {fileID: 278180662}
+  rocketPrefab: {fileID: 3008676831190587205, guid: 0dcdc4687eb204b4dae2bc69fa71e717, type: 3}
   CheckPlayerDestroyed: 0
 --- !u!1001 &7305732181041295649
 PrefabInstance:
