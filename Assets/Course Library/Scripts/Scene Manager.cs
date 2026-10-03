@@ -1,34 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class ScenevManager : MonoBehaviour
 {
-    public GameObject gameOverPanel;
-
-    // =========================
-    // GAME OVER
-    // =========================
-    public void GameOver()
-    {
-        // Show Game Over UI
-        gameOverPanel.SetActive(true);
-
-        // Pause the entire game
-        Time.timeScale = 0f;
-    }
-
-    // =========================
-    // RETRY
-    // =========================
-    public void Retry(int sceneIndex)
-    {
-        // Make absolutely sure the game is unpaused
-        Time.timeScale = 1f;
-
-        // Reload the selected scene
-        SceneManager.LoadScene(sceneIndex);
-    }
-
     // =========================
     // MAIN MENU
     // =========================
@@ -40,7 +14,36 @@ public class GameManager : MonoBehaviour
         // Load Main Menu
         SceneManager.LoadScene(sceneIndex);
     }
-   
+     public void Retry(int sceneIndex)
+    {
+        // Make absolutely sure the game is unpaused
+        Time.timeScale = 1f;
+
+        // Reload the selected scene
+        SceneManager.LoadScene(sceneIndex);
+    }
+    public void QuitGame()
+    {
+        // Quit the application
+        Application.Quit();
+    }
+    public void BonusLevel(int sceneIndex)
+    {
+        // Make sure the game is unpaused
+        Time.timeScale = 1f;
+
+        // Load Bonus Level
+        SceneManager.LoadScene(sceneIndex);
+    }
+    public void controls(int sceneIndex)
+    {
+        // Make sure the game is unpaused
+        Time.timeScale = 1f;
+
+        // Load Controls Scene
+        SceneManager.LoadScene(sceneIndex);
+    }
+
     // =========================
     // WHEN SCENE STARTS
     // =========================
@@ -52,3 +55,4 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 }
+

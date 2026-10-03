@@ -94,20 +94,20 @@ public class PlayerController : MonoBehaviour
     // ENABLE INPUT
     // =========================
      private void OnEnable()
-{
-    if (controls != null)
+    {
+       if (controls != null)
     {
         controls.Player.Enable();
     }
-}
+   }
 
-private void OnDisable()
-{
-    if (controls != null)
+    private void OnDisable()
     {
+     if (controls != null)
+     {
         controls.Player.Disable();
+     }
     }
-}
    
 
 
@@ -115,7 +115,12 @@ private void OnDisable()
     // UPDATE
     // =========================
     void Update()
-    {
+    {   if (controls == null)
+           return;
+
+       if (!isActiveAndEnabled)
+            return;
+
         // Read movement input from the new Input System
         Vector2 moveInput = controls.Player.Move.ReadValue<Vector2>();
 
@@ -390,14 +395,13 @@ private void OnDisable()
     // =========================
     // DESTROY PLAYER
     // =========================
-    bool DestroyPlayer()
-    {
+    private bool DestroyPlayer()
+    {   
         // Check if the player has fallen below the boundary
         if (transform.position.y < BottomBound)
         {   
             gameManager.GameOver();
-            // Destroy the player
-            return true;
+              return true;
         }
 
         return false;

@@ -10,10 +10,22 @@ public class RotateCamera : MonoBehaviour
         controls = new InputSystem_Actions();
     }
 
-    void OnEnable()
+     private void OnEnable()
+    {
+       if (controls != null)
     {
         controls.Player.Enable();
     }
+   }
+
+    private void OnDisable()
+    {
+     if (controls != null)
+     {
+        controls.Player.Disable();
+     }
+    }
+   
     void Update()
     {
         Vector2 moveInput = controls.Player.Move.ReadValue<Vector2>();

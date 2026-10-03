@@ -8,5 +8,14 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Prototype 4.unity
     guid: a4b96ad7a65484fd4a83cb97540eee50
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 1d2f2164943f2594d915ecd2a7eaf60a
+  - enabled: 1
+    path: Assets/Challenge 4/Challenge 4.unity
+    guid: bafab91dee6434fbcb28a5a16e78982f
+  - enabled: 1
+    path: Assets/Scenes/Contriols.unity
+    guid: 57c9405988d0f974f88bdea2ffd30ecb
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
