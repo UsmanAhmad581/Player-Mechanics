@@ -5,7 +5,10 @@ using Unity.VisualScripting;
  
 
 public class PlayerController : MonoBehaviour
-{
+{   
+    public AudioSource audioSource;
+    public AudioClip powerUpSmashSound;
+    public AudioClip powerUpRocketSound;
     // =========================
     // PLAYER VARIABLES
     // =========================
@@ -153,8 +156,10 @@ public class PlayerController : MonoBehaviour
         // launch rockets at all enemies.
         if (currentPowerUp == PowerUpType.Rockets &&
            controls.Player.Rocket.WasPressedThisFrame())
-       {
+       {     
+            audioSource.PlayOneShot(powerUpRocketSound);
              LaunchRockets();
+             
         }
 
 
@@ -172,7 +177,7 @@ public class PlayerController : MonoBehaviour
          {
             // Player is now performing Smash
             smashing = true;
-
+            audioSource.PlayOneShot(powerUpSmashSound);
             // Start the Smash coroutine
             StartCoroutine(Smash());
         }
