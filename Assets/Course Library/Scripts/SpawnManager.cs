@@ -1,10 +1,12 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class SpawnManager : MonoBehaviour
 {
     //public GameObject BossPrefab;
-
+    private float bossSpawnTime;
+    private bool miniEnemiesSpawned = false;
     public GameObject[] Enemies;
     private float spawnRange = 9f;
     public int enemyCount;
@@ -126,17 +128,6 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-
-    // void spawnProjectile()
-    // {
-    //     Instantiate(
-    //         ProjectilePrefab,
-    //         ProjectilePrefab.transform.position,
-    //         ProjectilePrefab.transform.rotation
-    //     );
-    // }
-
-
     // =====================================================
     // RANDOM ENEMY
     // =====================================================
@@ -193,11 +184,11 @@ public class SpawnManager : MonoBehaviour
 
                            // Spawn a boss every x number of waves
            if (waveNumber % bossRound == 0)
-          {
-            SpawnBossWave(waveNumber);
+           {
+             StartCoroutine(SpawnBossAndMiniEnemies()); 
             }
             else
-           {
+            {
             SpawnEnemyWave(waveNumber);
             }
 
@@ -224,6 +215,14 @@ public class SpawnManager : MonoBehaviour
         {
             GameOver();
         }
+    }
+    IEnumerator SpawnBossAndMiniEnemies()
+    {
+       SpawnBossWave(waveNumber);
+
+       yield return new WaitForSeconds(5f);
+
+       SpawnMiniEnemy(4);
     }
 
 

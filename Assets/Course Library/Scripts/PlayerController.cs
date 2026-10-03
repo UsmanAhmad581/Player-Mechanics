@@ -177,7 +177,6 @@ public class PlayerController : MonoBehaviour
          {
             // Player is now performing Smash
             smashing = true;
-            audioSource.PlayOneShot(powerUpSmashSound);
             // Start the Smash coroutine
             StartCoroutine(Smash());
         }
@@ -360,6 +359,7 @@ public class PlayerController : MonoBehaviour
             // Wait until the next frame
             yield return null;
         }
+        audioSource.PlayOneShot(powerUpSmashSound);
 
 
         // -------------------------------------------------
