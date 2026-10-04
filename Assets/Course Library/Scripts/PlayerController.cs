@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip powerUpSmashSound;
     public AudioClip powerUpRocketSound;
+    public AudioClip PushBackSound;
+
     // =========================
     // PLAYER VARIABLES
     // =========================
@@ -256,12 +258,14 @@ public class PlayerController : MonoBehaviour
     // ENEMY COLLISION
     // =========================
     private void OnCollisionEnter(Collision collision)
-    {
+    {   
+
         // Push the enemy only when the current power-up
         // is specifically the Pushback power-up.
         if (collision.gameObject.CompareTag("Enemy") &&
             currentPowerUp == PowerUpType.Pushback)
-        {
+        {   
+            audioSource.PlayOneShot(PushBackSound);
             // Get the enemy's Rigidbody
             Rigidbody enemyRigidbody =
                 collision.gameObject.GetComponent<Rigidbody>();
