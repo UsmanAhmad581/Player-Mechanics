@@ -11,6 +11,7 @@ public class SpawnManager : MonoBehaviour
     private float spawnRange = 9f;
     public int enemyCount;
     public int waveNumber = 1;
+    private int MiniEnemy = 4;
 
     public GameObject bossPrefab;
     public GameObject[] miniEnemyPrefabs;
@@ -220,9 +221,13 @@ public class SpawnManager : MonoBehaviour
     {
        SpawnBossWave(waveNumber);
 
-       yield return new WaitForSeconds(5f);
+       yield return new WaitForSeconds(30f);
 
-       SpawnMiniEnemy(4);
+       SpawnMiniEnemy(MiniEnemy);
+
+       yield return new WaitForSeconds(30f);
+
+       SpawnMiniEnemy(MiniEnemy + 2);
     }
 
 

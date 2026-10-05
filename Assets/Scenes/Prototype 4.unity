@@ -1742,7 +1742,7 @@ MonoBehaviour:
   miniEnemyPrefabs:
   - {fileID: 8252573324198006394, guid: aab0bc7598bc0f4489ae77f29dfae813, type: 3}
   - {fileID: 8252573324198006394, guid: aab0bc7598bc0f4489ae77f29dfae813, type: 3}
-  bossRound: 6
+  bossRound: 2
   powerupPrefabs:
   - {fileID: 4550507397534086163, guid: c3df8888fbc748443be3f0ed7db8b793, type: 3}
   - {fileID: 4907248367865718451, guid: 9990f6a6721c4e647bcb9ba8950e1045, type: 3}
