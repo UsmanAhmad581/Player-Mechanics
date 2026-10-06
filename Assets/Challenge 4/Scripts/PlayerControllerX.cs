@@ -30,6 +30,10 @@ public class PlayerControllerX : MonoBehaviour
     {
         controls.Player.Enable();
     }
+    void OnDisable()
+    {
+        controls.Player.Disable();
+    }
 
     void Start()
     {
