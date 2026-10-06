@@ -19,6 +19,10 @@ public class RotateCameraX : MonoBehaviour
         controls.Player.Enable();
     }
 
+    void OnDisable()
+    {
+        controls.Player.Disable();
+    }
     // Update is called once per frame
     void Update()
     {
