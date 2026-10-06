@@ -17,6 +17,10 @@ public class SpawnManager : MonoBehaviour
     public GameObject[] miniEnemyPrefabs;
     public int bossRound;
 
+     public AudioSource audioSource;
+      public AudioClip GameOverSound;
+    public bool playerDestroyed = false;
+
     // =====================================================
     // CHANGED:
     // Changed powerupPrefab to powerupPrefabs (array).
@@ -224,10 +228,22 @@ public class SpawnManager : MonoBehaviour
        yield return new WaitForSeconds(30f);
 
        SpawnMiniEnemy(MiniEnemy);
+        int randomPowerup =
+                Random.Range(0, powerupPrefabs.Length);
+     Instantiate(
+        powerupPrefabs[randomPowerup],
+                GenerateSpawnPosition(),
+                powerupPrefabs[randomPowerup].transform.rotation
+            );
 
        yield return new WaitForSeconds(30f);
 
        SpawnMiniEnemy(MiniEnemy + 2);
+       Instantiate(
+        powerupPrefabs[randomPowerup],
+                GenerateSpawnPosition(),
+                powerupPrefabs[randomPowerup].transform.rotation
+            );
     }
 
 
@@ -238,5 +254,10 @@ public class SpawnManager : MonoBehaviour
     void GameOver()
     {
         GameOverText.gameObject.SetActive(true);
+        if(!playerDestroyed)
+        {
+            audioSource.PlayOneShot(GameOverSound);
+            playerDestroyed = true;
+        }
     }
 }
