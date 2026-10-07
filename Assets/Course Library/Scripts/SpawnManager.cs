@@ -29,10 +29,10 @@ public class SpawnManager : MonoBehaviour
     // =====================================================
     public GameObject[] powerupPrefabs;
 
-    // public GameObject ProjectilePrefab;
-    // private float ProjectileSpawnTime = 0.5f;
 
     public TextMeshProUGUI GameOverText;
+    public TextMeshProUGUI RoundText;
+    public TextMeshProUGUI BossText;
 
     private PlayerController playerControllerScript;
 
@@ -98,6 +98,7 @@ public class SpawnManager : MonoBehaviour
      {
      miniEnemysToSpawn = 1;
      }
+     StartCoroutine(BossTextDisplay());
      var boss = Instantiate(bossPrefab, GenerateSpawnPosition(),
      bossPrefab.transform.rotation);
      boss.GetComponent<EnemyFollow>().miniEnemySpawnCount = miniEnemysToSpawn;
@@ -124,7 +125,8 @@ public class SpawnManager : MonoBehaviour
     void SpawnEnemyWave(int enemiesToSpawn)
     {
         for (int i = 0; i < enemiesToSpawn; i++)
-        {
+        {   
+            StartCoroutine(RoundTextDisplay());
             Instantiate(
                 Enemies[RandomEnemy()],
                 GenerateSpawnPosition(),
@@ -210,6 +212,8 @@ public class SpawnManager : MonoBehaviour
                 powerupPrefabs[randomPowerup].transform.rotation
             );
         }
+    
+
 
 
         // =================================================
@@ -244,6 +248,20 @@ public class SpawnManager : MonoBehaviour
                 GenerateSpawnPosition(),
                 powerupPrefabs[randomPowerup].transform.rotation
             );
+    }
+    IEnumerator RoundTextDisplay()
+    {
+        RoundText.gameObject.SetActive(true);
+        RoundText.text = "Round: " + waveNumber;
+        yield return new WaitForSeconds(2f);
+        RoundText.gameObject.SetActive(false);
+    }
+    IEnumerator BossTextDisplay()
+    {
+        BossText.gameObject.SetActive(true);
+        BossText.text = "Boss Round!";
+        yield return new WaitForSeconds(2f);
+        BossText.gameObject.SetActive(false);
     }
 
 
