@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class SpawnManagerX : MonoBehaviour
 {
     public GameObject enemyPrefab;
+    public TextMeshProUGUI BonusText;
     public GameObject powerupPrefab;
 
     private float spawnRangeX = 10;
@@ -18,9 +20,11 @@ public class SpawnManagerX : MonoBehaviour
     public float speedIncrease = 20f;
     public GameObject player; 
 
+
     void Start()
     {
         SpawnEnemyWave(waveCount);
+        StartCoroutine(BonusTextDisplay());
     }
     // Update is called once per frame
     void Update()
@@ -73,6 +77,13 @@ public class SpawnManagerX : MonoBehaviour
         player.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
         player.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 
+    }
+    IEnumerator BonusTextDisplay()
+    {
+        BonusText.gameObject.SetActive(true);
+        BonusText.text = "Bonus Round!";
+        yield return new WaitForSeconds(2f);
+        BonusText.gameObject.SetActive(false);
     }
 
 }
